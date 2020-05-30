@@ -1,6 +1,6 @@
 class SelectionSort {
     public static void SS(int arr[],int n) {
-	for(int i=0;i<n;i++) {
+	for(int i=0;i<n-1;i++) {
 	    int max = -1;
 	    int maxIndex = -1;
 	    for(int j=i ;j<n; j++) {
