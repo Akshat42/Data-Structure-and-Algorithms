@@ -13,6 +13,20 @@ class insertionSort {
 	}
 	return input;
     }
+    public static int[] recursiveIS(int input[],int n) { 
+	if( n < 0 )
+	    return new int[1];
+	recursiveIS(input,n-1); // call till the last recursion, that is IS(input, n=1);
+	int key = input[n]; // takiing the key that is to be inserted into the correct position;
+	int j = n-1; //previous element index before key
+	while(j >=0 && input[j] > key) { // comparing and replacing if previous elements are greater than key; 
+	    input[j+1] = input[j];
+	    j--;
+	}
+	input[j+1] = key; //placing key at the correct place
+	return input;
+    }
+	
     public static void main(String args[]) {
 	Scanner sc = new Scanner(System.in);
 	System.out.println("Enter the number to be sorted");
@@ -21,7 +35,7 @@ class insertionSort {
 	System.out.println("Enter the inputs");
 	for(int i=0;i<n;i++)
 	    input[i] = sc.nextInt();
-	int[] output = IS(input); //sorted output
+	int[] output = recursiveIS(input,n-1); //sorted output
 	System.out.println("Sorted array is: ");
 	for(int i=0; i < n; i++)
 	    System.out.print(output[i] + " "); // printing output
