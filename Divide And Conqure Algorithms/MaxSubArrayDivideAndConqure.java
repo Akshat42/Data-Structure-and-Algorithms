@@ -60,8 +60,7 @@ class MaxSubArrayDivideAndConqure {
       }
     }
     return new int[] {maxLeft, maxRight, leftSum + rightSum};
-  }
-
+	}
   public static void main(String args[]) {
     Scanner sc = new Scanner(System.in);
     int n = sc.nextInt();
