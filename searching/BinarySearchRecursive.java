@@ -2,17 +2,14 @@ import java.util.Scanner;
 
 class BinarySearchRecursive {
   public static int BSR(int a[], int low, int high, int key) {
-    if (low < high) {
+    if (low > high) return -1;
       int mid = (low + high) / 2;
-      if (a[mid] == key) {
+      if (a[mid] == key) 
         return mid;
-      }
-      if (a[mid] < key) {
-        return BSR(a, mid + 1, high, key);
-      }
-      if (a[mid] > key) return BSR(a, low, mid, key);
-    }
-    return -1;
+	  else if (a[mid] < key) 
+        return BSR(a, mid + 1, high, key); 
+	  else
+	  return BSR(a, low, mid-1, key);
   }
 
   public static void main(String args[]) {
