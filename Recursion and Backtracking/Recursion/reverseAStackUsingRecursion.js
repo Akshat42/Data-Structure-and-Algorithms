@@ -2,7 +2,18 @@ function reverse(stack) {
 	if(stack.length === 0) return;
 	let temp = stack.pop();
 	reverse(stack);
-	stack.unshift(temp);
+	insertAtBottom(stack, temp);
+	return stack;
+}
+
+function insertAtBottom(stack, temp) {
+	if(stack.length === 0) {
+		stack.push(temp);
+		return;
+	}
+	let top = stack.pop();
+	insertAtBottom(stack,temp);
+	stack.push(top);
 	return stack;
 }
 
