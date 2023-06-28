@@ -1,61 +1,74 @@
-import java.util.*;
-class Mergesort {
-    public static void MergeSort(int arr[], int l,int r) {
-	if(r > l) { // right index should be always greater than left index
-	    int m = (l + r) / 2; // calculate the mid
-	    MergeSort(arr ,l,m); // call MergeSort() for the first half of the array
-	    MergeSort(arr ,m+1,r); // call MergerSort() for the second half of the array
-	    merge(arr,l,m,r); // call merge() to Merge the left subarray and right subarray 
-	}
-    }
-    public static void merge(int[] arr, int l,int m, int r) {
-//	System.out.println("left "+l+" mid "+m+" right "+r);
-	int n1 = m-l+1; // calculate n1 for storing the left subpart
-	int n2 = r-m; // calculate n2 for storing the right subpart
-	
-	//initialize L[] and R[] array
-	int L[] = new int[n1]; 
-	int R[] = new int[n2];
-	// copy the left subpart and right subpart in L[] and R[] array
-	for(int i=0; i<n1; i++) 
-	    L[i] = arr[l+i];
-	for(int j=0; j<n2; j++)
-	    R[j] = arr[m + 1 + j];
+import java.util.Arrays;
+class MergeSort {
+		public static void MS(int a[], int p, int r) {
 
-	int i=0,j=0;
+				if(p < r) {
+						// find the mid
+						int q = ( p + r ) / 2;
+						// call MS(...) on left half of subarray
+						MS(a, p, q);
+						// call MS(...) on the right half of subarray
+						MS(a, q + 1, r);
+						merge(a, p, q, r);
+				}
+		}
+		
+		public static void merge(int a[], int p, int q, int r) {
+				System.out.println("Merge method starts");	
+				System.out.println(p+" "+q+" "+r);
+				int L1[] = new int[q-p+1];
+				int L2[] = new int[r-q];	
 
-	int k=l;
-	//compare left and right subarray and insert it into the main array(arr)
-	while(i<n1 && j<n2){
-	    if(L[i] <= R[j]){
-		arr[k] = L[i];
-		i++;
-	    }
-	    else {
-		arr[k] = R[j];
-		j++;
-	    }
-	    k++;
-	}
+				for(int i=0; i<L1.length;i++)
+						L1[i] = a[p+i];
+				System.out.println("L1 ");	
+				System.out.println(Arrays.toString(L1));
+				System.out.println(p+" "+q+" "+r);
+				for(int j = 0; j<L2.length;j++)
+						L2[j] = a[q+1+j];
+				
+				System.out.println("L2 ");
+				System.out.println(Arrays.toString(L2));
+				int i=0, j=0;
+				int k = p;
+				while(i<L1.length && j<L2.length) {
+						if(L1[i] > L2[j]) {
+								a[k] = L2[j];
+								j++;
+								k++;
+						} else {
+								a[k] = L1[i];
+								i++;
+								k++;
+						}
+				}
+				System.out.println("sorted");
+				while(i< L1.length) {
+						a[k] = L1[i];
+						i++;
+						k++;
+				}
 
-	//copy the remaining elements from L[] and R[] to main array(if present)
-	while(i<n1){
-	    arr[k] = L[i];
-	    i++;
-	    k++;
-	}
-	while(j<n2) {
-	    arr[k] = R[j];
-	    j++;
-	    k++;
-	}
-    }
-    public static void main (String args[]) {
-	int arr[] = {38,27,43,3,9,82,10};
-	MergeSort(arr,0,6);
-	for(int i:arr)
-	    System.out.print(i + " ");
-	System.out.println();
+				while(j< L2.length) {
+						a[k] = L2[j];
+						j++;
+						k++;
+				}
+				System.out.println("Copying remaining elements");
+				System.out.println("Array afer merging "+Arrays.toString(a));
+		}
+		public static void print(int a[]) {
+				for(int ele:a) {
+						System.out.print(ele+" ");
+				System.out.println();
+				}
+		}
 
-    }
+		public static void main (String args[]) {
+				int a[] = {2,4,5,7,1,2,3,6};
+				MS(a,0,7);
+				for(int ele:a)
+						System.out.print(ele+" ");
+				System.out.println();
+		}
 }
